@@ -1,0 +1,13 @@
+.panel {
+    color: #000!important;
+    /* background-color: #cdf1cd!important; */
+    /* border: 1px solid #ccc!important; */
+    background-color:#aeeef1!important;
+    border: 1px solid #00bcd4!important;
+    margin-top: 10px !important;
+}
+
+.closed{
+    margin-right: 20px !important;
+    color: black !important;
+}

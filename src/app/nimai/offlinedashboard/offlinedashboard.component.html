@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>{{tradeName}}</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      name="viewport"
+    />
+    <meta name="viewport" content="width=device-width" />
+  </head>
+
+  <body>
+    <div
+      [hidden]="!isQuote"
+      style="
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: 1048;
+        background-color: rgba(0, 0, 0, 0.1);
+      "
+    ></div>
+    <div
+      [hidden]="!isQuote"
+      style="
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: 1048;
+        background-color: rgba(0, 0, 0, 0.1);
+      "
+    ></div>
+    <div
+      [hidden]="!isQuote"
+      style="
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: 1048;
+        background-color: rgba(0, 0, 0, 0.1);
+      "
+    ></div>
+    <div
+      [hidden]="!isQuote"
+      style="
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: 1048;
+        background-color: rgba(0, 0, 0, 0.1);
+      "
+    ></div>
+    <div
+      [hidden]="!isQuote"
+      style="
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: 1048;
+        background-color: rgba(0, 0, 0, 0.1);
+      "
+    ></div>
+    <div
+      [hidden]="!isQuote"
+      style="
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: 1048;
+        background-color: rgba(0, 0, 0, 0.1);
+      "
+    ></div>
+    <div
+      [hidden]="!isQuote"
+      style="
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: 1048;
+        background-color: rgba(0, 0, 0, 0.1);
+      "
+    ></div>
+    <div
+      [hidden]="!isQuote"
+      style="
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: 1048;
+        background-color: rgba(0, 0, 0, 0.1);
+      "
+    ></div>
+    <div class="wrapper" >
+      <div
+        class="sidebar"
+        data-active-color="blue"
+        data-background-color="black"
+        data-image="assets/images/sidebar-1.jpg"
+      >
+     
+          <div class="logo" >
+            &nbsp; &nbsp;&nbsp; <img style="position:relative;backdrop-filter: blur(8px);" src="assets/images/360TF-3.jpg" 
+            width="215" height="75"/>
+        </div>
+        <div class="sidebar-wrapper">
+          <div class="user">
+            <div class="photo iconWrapper">
+              <i class="fas fa-user-circle" aria-hidden="true"></i>
+              <!-- <img src="../../assets/img/faces/avatar.jpg" /> -->
+            </div>
+            <div class="info">
+              <a
+                data-toggle="collapse"
+                href="#collapseExample"
+                class=""
+                aria-expanded="true"
+              >
+                <span>
+                  &nbsp; {{ username }} &nbsp;
+                  <b class="caret"></b>
+                </span>
+              </a>
+              <div class="clearfix"></div>
+              <div
+                class="collapse in"
+                id="collapseExample"
+                aria-expanded="true"
+              >
+                <ul class="nav">
+                 
+                  <li>
+                    <a [routerLink]="['support']">Support</a></li>
+                  <li *ngIf="(nimaiCount.kycstatus | lowercase) == 'approved'">
+                    <a  *ngIf="!hideSubAccount" [routerLink]="['subscription']" (click)="loadRoute()" >Subscription</a></li>
+                  <li *ngIf="(nimaiCount.kycstatus | lowercase) == 'approved'"><a *ngIf="isCustomer && hideVas"  [routerLink]="['vasPlan']">Vas Plan</a></li>
+                  <li> <a (click)="openTermAndServiceDialog(null)" style="cursor: pointer;">Terms and Condition</a></li>
+                
+                  <li>
+                    <a
+                      href="javascript:void(0);"
+                      id="btnLogin"
+                      (click)="logout()"
+                    >
+                      <!-- <span class="sidebar-mini"> L </span> -->
+                      <!-- <span class="sidebar-normal"> Logout </span> -->
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <ul class="nav">
+            <li>
+              <div class="collapse in" id="pagesExamples" >
+                <ul class="nav">
+                
+                  <li  [routerLinkActive]="['active']">
+                    <a [routerLink]="['dashboard-details']" (click)="gotodashboard()" >
+                      <i class="fas fa-industry"></i>
+                      <p>Dashboard</p>
+                    </a>
+                  
+                  </li>
+                 
+                 
+                  <li
+                    *ngIf="
+                      (isCustomer || isBank) 
+                    "
+                  >
+                    <a
+                      data-toggle="collapse"
+                      href="#transactionPages"
+                      [attr.aria-expanded]="areaExpandedtra"
+                    >
+                      <i class="fa fa-book fa-fw"></i>
+                     
+                      <p *ngIf="isBank">
+                        Primary Transaction
+                         <b class="caret"></b>
+                       </p>
+                      
+                    </a>
+                    <div
+                      class="collapse"
+                      id="transactionPages"
+                      [ngClass]="transactionpages"
+                    >
+                      <ul class="nav">
+                        
+                        <li *ngIf="isBank" [routerLinkActive]="['active']">
+                          <a [routerLink]="['newrequest']" >
+                            <i class="fas fa-concierge-bell"></i>
+                            <p>New Request</p>
+                          </a>
+                        </li>
+                       
+                        <li
+                          *ngIf="isCustomer || isBank"
+                          [routerLinkActive]="['active']"
+                        >
+                          <a [routerLink]="['activerequest']" >
+                            <i class="fa fa-check-square-o"></i>
+                            <p>Active Transaction</p>
+                          </a>
+                        </li>
+                        <li
+                          *ngIf="isCustomer || isBank"
+                          [routerLinkActive]="['active']"
+                        >
+                          <a [routerLink]="['transaction-details']" >
+                            <i class="fa fa-th-list"></i>
+                            <p>Transaction Details</p>
+                          </a>
+                        </li>
+                       
+                       
+                      </ul>
+                    </div>
+                  </li>
+
+                  <li>  
+                  <a
+                    data-toggle="collapse"
+                    href="#newTransactionPages"
+                    [attr.aria-expanded]="areaExpandedacc"
+                  >
+                    <i class="fa fa-book fa-fw"></i>
+                    <!-- <p>
+                    Secondary Transaction
+                      <b class="caret"></b>
+                    </p> -->
+                    <!-- new changes  -->
+                    <p>
+                      Secondary Distribution
+                        <b class="caret"></b>
+                      </p>
+                      <!-- end -->
+                  </a>
+
+                  <div
+                  class="collapse"
+                  id="newTransactionPages"
+                  [ngClass]="transactionpages2 || transactionpages3"
+                  >
+
+                  <li style="padding-left: 24px;"
+                 
+                >
+                  <a
+                    data-toggle="collapse"
+                    href="#newTransactionPages2"
+                    [attr.aria-expanded]="areaExpandedass" style="margin-top: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;padding-right: 0px;"
+                  >
+                    <i class="fa fa-book fa-fw" style="padding-top: 0px"></i>
+                    
+                    <p style="margin-top: 7px !important;" (click)="notaccess()">
+                      Selling Institution
+                      <b class="caret"></b>
+                    </p>
+                    <!-- <div class="b">
+                      <span style="margin-top: 7px !important;">
+                        Secondary Transaction Placement
+                         <b class="caret"></b>
+                      </span>
+                    </div> -->
+                  </a>
+                  
+                </li>
+<!-- </div>
+
+<div
+class="collapse"
+id="newTransactionPages"
+[ngClass]="transactionpages"
+> -->
+
+                <li style="padding-left: 24px;"
+                *ngIf="
+                  (isBank) 
+                "
+              >
+                <a
+                  data-toggle="collapse"
+                  href="#newTransactionPages1"
+                  [attr.aria-expanded]="areaExpandedacc" style="margin-top: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;padding-right: 0px;"
+                >
+                  <i class="fa fa-book fa-fw" style="padding-top: 0px"></i>
+                  <p style="margin-top: 7px !important;">
+                   Buying Institution
+                    <b class="caret"></b>
+                  </p>
+                  <!-- <div class="b">
+                    <span style="margin-top: 7px !important;" >
+                      Secondary Transaction Quotes
+                       <b class="caret"></b>
+                    </span> 
+                    </div> -->
+                </a>
+                <div
+                  class="collapse"
+                  id="newTransactionPages1"
+                  [ngClass]="transactionpages3"
+                >
+                  <ul class="nav">
+                    <li *ngIf="isBank" [routerLinkActive]="['active']">
+                      <a [routerLink]="['new-transaction-qoute']" >
+                        <i class="fas fa-concierge-bell"></i>
+                        <p>New Request</p>
+                      </a>
+                    </li>
+                  
+                    <li
+                      *ngIf="isBank"
+                      [routerLinkActive]="['active']"
+                    >
+                      <a [routerLink]="['active-transaction-qoute']" >
+                        <i class="fa fa-check-square-o"></i>
+                        <p>Active Transaction</p>
+                      </a>
+                    </li>
+                    <li
+                      *ngIf="isBank"
+                      [routerLinkActive]="['active']"
+                    >
+                      <a [routerLink]="['transaction-detail-qoute']" >
+                        <i class="fa fa-th-list"></i>
+                        <p>Transaction Details</p>
+                      </a>
+                    </li>
+                  
+                    
+                  </ul>
+                </div>
+              </li> 
+
+</div>
+              </li>
+
+
+
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <div class="row"></div>
+       
+        </div>
+      </div>
+      <div class="main-panel">
+        <nav class="navbar navbar-transparent navbar-absolute">
+          <div class="container-fluid">
+            <div class="navbar-minimize">
+              <button
+                id="minimizeSidebar"
+                class="btn btn-round btn-white btn-fill btn-just-icon"
+              >
+                <i class="visible-on-sidebar-regular fas fa-ellipsis-v"></i>
+                <i
+                  class="material-icons visible-on-sidebar-mini fas fa-bars"
+                ></i>
+              </button>
+            </div>
+            <div class="navbar-header">
+              <button
+                type="button"
+                class="navbar-toggle"
+                data-toggle="collapse"
+              >
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse">
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown dduser">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <!-- <small style="font-size: 74%;">{{userType}}&nbsp;&nbsp;</small> -->
+
+                    <i class="fas fa-user-circle"></i>
+                    <span class="dropuser"> &nbsp; {{ username }}  &nbsp; <br>
+                      <small class="userType">&nbsp;&nbsp;({{ userType  }})&nbsp;</small></span>
+                    <span class="caret"></span>
+                    <!-- <p class="hidden-lg hidden-md">Profile</p> -->
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a [routerLink]="['support']">Support</a></li>
+                      <li> <a (click)="openTermAndServiceDialog(null)" style="cursor: pointer;">Terms and Condition</a></li>
+                  </ul>
+                </li>
+                <li class="separator hidden-lg hidden-md"></li>
+              </ul>     
+             
+                <i *ngIf="creditenable=='yes'"  class='fas fa-coins navbar-right' style='font-size:36px;color:grey;padding-top: 10px;'>
+                  <span style="color: #555555;font-size: 14px;"> &nbsp;&nbsp;{{ creditCount}}  Credits</span> 
+                </i>
+        
+            
+            </div>
+          </div>
+        </nav>
+        
+     <!-- // not access popup -->
+     <div id="myModal17" [hidden]="!notaccessed" style="display: none;top: 4%;z-index: 9999;opacity: 1;" 
+     class="popupnew modal fade" role="dialog">
+         <div class="modal-dialog modal-md emaildiv">
+             <!-- Modal content-->
+             <div class="modal-content" style=" margin-top: 206px;">
+                 <div class="modal-body">
+                     <h2>You cannot Access this service</h2>
+                     <div class="padnew">
+                         <!--<p><strong>Enter Email ID here</strong></p> -->
+                         <div class="">
+                             <div class="row">
+                                 <div class="col-md-12">
+                                     <!-- <label> -->
+                                         To avail this service <span><a (click)="openpopup()" style="cursor: pointer;" >Click here</a></span> or send email to <b>tradesupport@360tf.trade</b>
+                                     <!-- </label> -->
+                                     
+                                  
+                                 </div>
+                                 <button type="submit" class="btn btn-info pull-right" (click)="closed()" data-dismiss="modal">Ok</button>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         </div>
+
+         <!-- end -->
+<!-- new popup for click here -->
+<div id="myModal20"  style="display: none;top: 4%;z-index: 9999;opacity: 1;" 
+class="popupnew modal fade" role="dialog">
+<div class="modal-dialog modal-md emaildiv">
+    <!-- Modal content-->
+    <div class="modal-content" style=" margin-top: 206px;">
+        <div class="modal-body">
+            <h2>Thank You</h2>
+            <div class="padnew">
+                <!--<p><strong>Enter Email ID here</strong></p> -->
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-12">
+                         
+                            Thank you for showing your interest , our relationship officer will connect you shortly  
+                           
+                        </div>
+                        <button type="submit" class="btn btn-info pull-right" (click)="closepopup()" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<!-- end  -->
+
+      <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <router-outlet></router-outlet>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<app-term-and-conditions></app-term-and-conditions>
+
+<div class="grid-row loadingdiv" [hidden]="!loading">
+  <div class="col">
+    <div class="content-a">
+      <div class="content-b">
+        <ul class="loading">
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

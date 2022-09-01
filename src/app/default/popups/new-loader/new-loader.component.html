@@ -1,0 +1,21 @@
+<!-- <div class="grid-row loadingdiv" [hidden]="loadingnew">
+    <div class="col">
+       <div class="content-a">
+          <div class="content-b">
+       <ul class="loadingnew">
+          <li></li>
+          <li></li>
+          <li></li>
+       </ul>
+       </div>
+       </div>
+    </div>
+ </div> -->
+ <div class="progress-loader" *ngIf="loadingnew">
+
+   <mat-progress-spinner style="color: #00b4db;" [mode]="'indeterminate'">
+
+   </mat-progress-spinner>
+
+</div>
+ 

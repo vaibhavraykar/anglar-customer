@@ -1,0 +1,58 @@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <!-- <div class="fas fa-file-invoice-dollar" data-background-color="blue">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div> -->
+                     <div class="card-header card-header-icon" data-background-color="blue">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                    <div class="card-content">
+                        <h4 class="card-title"> <span id="changetext"><b style="font-weight: 500 !important; "> Leads</b></span>
+                        </h4>
+                            <div class="row">
+                                <div class="col-md-12" *ngIf="noData">
+                                    No Data is available
+                                </div>
+                                <div class="col-md-12" *ngIf="!noData">
+                                    <div class="table-responsive material-datatables" cellspacing="0" width="100%" style="width:100%">
+                                           
+                                        <table class="table table-hover" id="datatables">
+                                            <thead>
+                                                    <tr>
+                                                        <th style="min-width: 20px !important;" class="disabled-sorting text-center">#</th>
+                                                        <th style="min-width: 130px;">First Name</th>
+                                                        <th style="min-width: 150px;">Last Name</th>
+                                                        <th style="min-width: 150px;">EmailID</th>
+                                                        <th style="min-width: 150px;">Register</th>
+                                                        <!-- <th style="min-width: 180px;">LeadID</th> -->
+                                                        <!-- <th style="min-width: 130px;">Landline No</th> -->
+                                                        <th style="min-width: 130px;">Mobile No</th>
+
+                                                    </tr>
+                                                </thead>
+                                            <tbody>
+                                                <tr *ngFor="let list of subscriptionData; let i = index">
+                                                    <td>{{i+1}}</td>
+                                                    <td nowrap>{{list.firstName }}</td>
+                                                    <td>{{list.lastName}}</td>                                                    
+                                                    <td>{{list.emailId}}</td>
+                                                    <td>{{list.isRegister}}</td>
+                                                    <!-- <td>{{list.leadId}}</td> -->
+                                                    <!-- <td>{{list.landline}}</td> -->
+                                                    <td nowrap >{{list.mobileNo}}</td>
+                                                </tr>
+                                              
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

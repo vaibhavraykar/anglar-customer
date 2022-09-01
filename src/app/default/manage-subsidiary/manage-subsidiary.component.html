@@ -1,0 +1,488 @@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="blue">
+                        <i class="fas fa-tasks"></i>
+                                        </div>
+                    
+                    <div class="card-content">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <h4 class="card-title"> <span id="changetext"><b style="font-weight: 500 !important; "> Manage Group Companies</b></span>
+                                <ul class="pull-right list-unstyled list-inline statusbar">
+                                    <li>
+                                        <label>Group Companies Slots Available <span class="">{{available}}</span></label>
+                                    </li>
+                                    <li><label>Group Companies Slots Utilized <span>{{subuticount}}</span></label></li>
+                              <li> 
+                                  <!-- <a  href="javascript:void()" class="btn btn-info pull-right"
+                                 (click)="addSubsidiary()">+ Add Subsidiary</a> -->
+                                </li>
+                                </ul>
+                               
+                            </h4>
+                        </div>
+                       <!-- <div class="col-md-4 col-sm-12 col-xs-12">
+                        <a class="btn btn-info pull-right" (click)="addSubsidiary()">+ Add Subsidiary</a>
+                       </div> -->
+                       <a  href="javascript:void()" class="btn btn-info pull-right addSub"
+                       (click)="addSubsidiary()">+ Add Company</a>
+                                        <div class="row">
+                        <div class="col-md-12" *ngIf="noData">
+                            No Group Companies Data is available
+                        </div>
+                        <div class="col-md-12" *ngIf="!noData">
+                            <div class="table-responsive material-datatables" id="transactionID" cellspacing="0" width="100%" style="width:100%">
+                                <table class="table table-hover" id="datatables">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width: 19px !important;" class="disabled-sorting text-center">#</th>
+                                        <th style="min-width: 130px;">Date</th>
+                                        <th style="min-width: 150px;">Company Name</th>
+                                        <th style="min-width: 120px;">Country Name</th>
+                                        <!-- <th style="min-width: 120px;">First Name</th>
+                                        <th style="min-width: 120px;">Last Name</th>
+                                        <th style="min-width: 210px;">Email</th>
+                                        <th style="min-width: 100px;">Credits Used</th>
+                                        <th style="min-width: 130px;width: 100px !important;">Quotes Received</th> -->
+                                        <th style="min-width: 100px;" nowrap class="disabled-sorting text-center">Status</th>
+                                        <th style="min-width: 130px;">KYC Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let list of subsidiaryData; let i = index">
+                                        <td>{{i+1}}</td>                                       
+                                        <td>{{list.accountCreatedDate  | date : "dd-MM-y"}}</td>                                    
+                                        <td>{{list.companyName}}</td>
+                                        <td>{{list.countryName}}</td>
+                                        <!-- <td>{{list.firstName}}</td>
+                                        <td>{{list.lastName}}</td>
+                                        <td>{{list.emailAddress}}</td>
+                                        <td>{{list.creditUsed}}</td>
+                                        <td>{{list.quoteReceived}}</td> -->
+                                        <td >{{list.accountStatus}}</td>  
+                                        <!-- <td>{{list.kycStatus}}</td> -->
+                                        <td>
+                                            <div *ngIf="list.kycStatus=='approved' || list.kycStatus=='APPROVED' || list.kycStatus=='Approved'"> 
+                                                {{list.kycStatus | titlecase}}
+                                             </div>
+                                            <div *ngIf="list.kycStatus=='pending' || list.kycStatus=='PENDING' || list.kycStatus=='Pending'"> 
+                                               {{list.kycStatus | titlecase}}
+                                            </div>
+                                            <div *ngIf="list.kycStatus=='Rejected' || list.kycStatus=='REJECTED' || list.kycStatus=='rejected' "> 
+                                               <span id="transactionDiv" style="cursor: pointer;text-decoration:underline;" (click)="reupload(list.userid)" >
+                                               {{list.kycStatus | titlecase}}
+                                               </span>
+                                            </div>
+                                         </td>
+                                        <!-- <td *ngIf="false">{{list.accountStatus}}</td>   -->
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addsub" class="popupnew modal fade in" role="dialog" style="display:none;">
+    <div class="modal-dialog emaildiv" style="width: 99%;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form [formGroup]="manageSubForm" (ngSubmit)="onSubmit()">
+                <div class="modal-body">
+                    <h2>Add Group Company
+                        <button type="button" class="close" (click)="close()" style="margin-left: 84% !important;">&times;</button>
+                    </h2>
+                    <div class="padnew">
+                        <div class="row">
+                            <div class="col-md-12">
+                             <div id="authemaildiv">
+                                    <!-- <p *ngIf="!respMessage"><strong>Enter details of an Authorized user</strong></p> -->
+                                  
+                                   <!-- <b> <div class="col-md-1" style="width: 5.333333%;">Sr No</div>
+                                    <div class="col-md-1 wd">Company Name</div>
+                                    <div class="col-md-1 wd">Registration Type</div>
+                                    <div class="col-md-1 wd">Country</div>
+                                    <div class="col-md-1 wd">Province/State</div>
+                                    <div class="col-md-1 wd" style="padding-left: 37px !important ;">City</div>
+                                    <div class="col-md-1 wd">Adress</div>
+                                    <div class="col-md-1 wd">Zipcode</div>
+                                    <div class="col-md-1 wd">Tel no</div>
+                                    <div class="col-md-1 wd">KYC Country</div>
+                                    <div class="col-md-1 wd">Valid Document</div>
+                                    <div class="col-md-1 wd" style="width: 11.333333%;padding-left: 10px !important;">Upload 
+                                          <span style="margin-left: 33px;">Delete </span> </div>
+                                    
+                                </b> -->
+                                    <div formArrayName="details"  *ngFor="let item of manageSubForm.get('details').controls; let i = index;">
+                                    <div class="col-md-1" style="width: 5.333333%;">
+                                        <div class="inputDiv">
+                                                <strong>{{i + 1}}</strong>
+                                          
+                                        </div>
+                                    </div>
+                                    <div [formGroupName]="i">
+                                    <div class="col-md-1">
+                                        <div class="inputDiv">
+                                            <input type="text" maxlength="" formControlName="companyName">
+                                            <label>Company Name</label>
+                                            <div *ngIf="submitted && item.controls['companyName'].hasError('required')" class="invalid-feedback">
+                                                Company Name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="inputDiv">
+                                            <!-- <input type="text" maxlength="" formControlName="registrationType" (keydown)="validateRegexFields($event, 'name_validation')"> -->
+                                            <select formControlName="registrationType" class="countryddl has-value"  >
+                                                <option value='null'>Select</option>
+                                                <option value='Impoter'>Impoter</option>
+                                                <option value='Expoter'>Expoter</option>
+                                                <option value='Both'>Both</option>
+                                            </select>
+                                            <label>Registration Type1</label>
+                                            <div *ngIf="submitted && item.controls['registrationType'].hasError('required')" class="invalid-feedback">
+                                                Registration Type1 is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-1">
+                                        <div class="inputDiv selectdiv">
+                                            <select formControlName="country" class="countryddl" (ngModelChange)="showCountryCode($event)"  class="has-value">
+                                                <option value='null'>Select</option>
+                                                <option *ngFor="let data of resp" [ngValue]='data.country'>{{data.country}}</option>                         
+                                            </select>
+                                            <label>Select Country</label>
+                                            <div *ngIf="submitted && item.controls['country'].hasError('required')" class="invalid-feedback">
+                                                Country is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <!-- <div class="inputDiv selectdiv">
+                                            <select formControlName="province" class="countryddl" (ngModelChange)="showCountryCode($event)">
+                                                <option value='null'>Select</option>
+                                                <option *ngFor="let data of resp" [ngValue]='data'>{{data.country}}</option>                         
+                                            </select>
+                                            <label>Province/State</label>
+                                            <div *ngIf="submitted && manageSubForm.province.errors" class="invalid-feedback">
+                                                <div *ngIf="manageSubForm.province.errors.required">
+                                                    province field is required
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="inputDiv">
+                                            <input type="text"     formControlName="state" 
+                                            (keydown)="validateRegexFields($event, 'name_validation')">
+                                            <label>Province/State</label>
+                                            <div *ngIf="submitted && item.controls['state'].hasError('required')" class="invalid-feedback">
+                                                State is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="inputDiv">
+                                            <input type="text"   formControlName="city" (keydown)="validateRegexFields($event, 'name_validation')">
+                                            <label>City</label>
+                                            <div *ngIf="submitted && item.controls['city'].hasError('required')" class="invalid-feedback">
+                                                City is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="inputDiv">
+                                            <input type="text"   formControlName="address" >
+                                            <label>Address</label>
+                                            <div *ngIf="submitted && item.controls['address'].hasError('required')" class="invalid-feedback">
+                                                Address is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="inputDiv">
+                                            <input type="text" class="input-error" maxlength="6" formControlName="zipcode">
+                                            <label>Zipcode</label>
+                                            <!-- <div *ngIf="submitted && item.controls.zipcode.errors?.required" class="invalid-feedback"> -->
+                                                <div *ngIf="submitted && item.controls['zipcode'].hasError('required') || item.controls['zipcode'].hasError('minlength')" class="invalid-feedback">
+                                                Zipcode is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="inputDiv">
+                                            <input type="text" formControlName="telephone" maxlength="12" (keypress)="validateRegexFields($event,'number')">
+                                            <label>Telephone No.</label>
+                                            <!-- <div *ngIf="manageSubForm.telephone.touched && manageSubForm.telephone.errors?.minlength" class="invalid-feedback">
+                                                Landline No. is atleast of 7 digits.
+                                            </div> -->
+                                            <div *ngIf="submitted && item.controls['telephone'].hasError('required') || item.controls['telephone'].hasError('minlength')" class="invalid-feedback">
+                                                Landline No. is atleast of 7 digits.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-1">
+                                        <div class="inputDiv selectdiv">
+                                            <select formControlName="kycCountry" class="countryddl" (ngModelChange)="showCountryCode($event)"  class="has-value">
+                                                <option value='null'>Select</option>
+                                                <option *ngFor="let data of resp" [ngValue]='data.country'>{{data.country}}</option>                         
+                                            </select>
+                                            <label>KYC Country</label>
+                                            <div *ngIf="submitted && item.controls['kycCountry'].hasError('required')" class="invalid-feedback">
+                                                kyc Country is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="inputDiv selectdiv">
+                                            <select formControlName="validDocument" class="countryddl" (ngModelChange)="showCountryCode($event)"  class="has-value">
+                                               <!--  <option value='null'>Select</option>
+                                                <option *ngFor="let data of resp" [ngValue]='data'>{{data.country}}</option>-->
+                                                <!-- <option [ngValue]="null" selected>Select</option> -->
+                                                <option value='null'>Select</option>
+                                                <!-- <option value="Passport" >Passport</option>
+                                                <option value="Driving License" >Driving License</option>
+                                                <option value="National Identity Card" >National Identity Card</option> -->
+                                                <option *ngIf="isCustomer" value="Registration Certificate or equivalent">Registration Certificate or equivalent</option>
+                                                <option value="Address Proof">Address Proof</option>
+                                                <option *ngIf="isCustomer" value="Tax identification document">Tax identification document</option>
+                                                <option *ngIf="isBank" value="Statutory License" style="color: black;">Statutory License</option>
+                                          
+                                            </select>
+                                            <label>Valid Document</label>
+                                            <div *ngIf="submitted && item.controls['validDocument'].hasError('required')" class="invalid-feedback">
+                                                Valid Document field is required
+                                            </div>
+                                            <!-- <div *ngIf="submitted && manageSubForm.validDocument.errors" class="invalid-feedback">
+                                                <div *ngIf="manageSubForm.validDocument.errors.required">
+                                                    Valid Document field is required
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="inputDiv">
+                                            
+                                            <input  #myInput (change)="handleFileProForma($event,item)" type="file" data-placeholder="No file" 
+                                             name="uploadDocument" 
+                                            id="uploadDocument" data-icon="false" style="width: 112%;"/>
+                                            <i class="material-icons closeNone closeBtnx"style="right: -49px;font-size: 24px !important;position: absolute;color: #5bb1e3;cursor: pointer;top: 8px;" 
+                                     (click)="deleteFileContent1(i)">delete</i>
+                                            <!-- <input type="text" formControlName="uploadDocument" maxlength="12" (keypress)="validateRegexFields($event,'number')"> -->
+                                            <!-- <label>Upload Document</label> -->
+                                            <!-- <div *ngIf="manageSubForm.uploadDocument.touched && manageSubForm.landlineNo.errors?.minlength" class="invalid-feedback">
+                                                Landline No. is atleast of 7 digits.
+                                            </div> -->
+                                            <div *ngIf="submitted && item.controls['uploadDocument'].hasError('required')" class="invalid-feedback">
+                                                Upload Document 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                                </div>
+                                <p id="paradiv">
+                                    {{respMessage}}
+                                </p>
+                                <div class="clearfix"></div>
+                                <!-- <br>
+                                <br> -->
+                                <input type="button" id="btnadd" (click)="addUser()" value="Add User" class="btn btn-info pull-right">
+
+                                <button type="submit" id="btninvite"  class="btn btn-info pull-right">Invite User</button>
+                                <!-- <span *ngIf="isError" style="color: red;margin-left: 707px;margin-top: 10px !important;">Kindly fill all the fields</span> -->
+
+                                <a (click)="onOkClick()" id="okbtn" class="btn btn-info pull-right">OK</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="txnPendingSub" style="display: none;top: 0%;z-index: 9999;opacity: 1;" class="popupnew modal fade" >
+    <div class="modal-dialog modal-md emaildiv" style="top: 120px;">
+       <!-- Modal content-->
+       <div class="modal-content">
+          <div class="modal-body">
+             <h2>{{errMsg}}</h2>
+             <div class="padnew">
+                <div class="row">
+                   <!--<p><strong>Enter Email ID here</strong></p> -->
+                   <div class="col-md-12">
+                      <div class="row">
+                         <div class="col-md-12">
+                            <p>{{trnxPendingMsg}}</p>
+                           
+                         </div>
+                      </div>
+                      <button type="submit" class="handleRefEdit btn btn-info pull-right" (click)="pendingOkBtn()">OK</button>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>
+
+
+
+
+  <div id="reuploadId" style="display: none;z-index: 9999;opacity: 1;" class="popupnew modal fade" role="dialog">
+    <div class="modal-dialog modal-md emaildiv" style="top: 76px;">
+       <div class="modal-content">
+          <div class="modal-body">
+             <h2>Re-submit KYC 
+                <button type="button" class="close" (click)="reclosePopup()">
+                    &times;
+                </button>
+             </h2>
+             <div class="padnew"  [formGroup]="reAssociateForm">
+                <div class="row">
+                   <div class="col-md-12">
+                      <div class="row">
+                         <div class="col-md-12" >
+
+
+
+                            <div>
+                                <h4 class="card-title col-md-12" style="padding: 5px 15px 15px 15px;font-size: 15px;font-weight: 500;">
+                                    Business KYC
+                                </h4>
+                                <div class="col-md-6">
+                                    <div class="inputDiv selectdiv">
+                                        <select id="reBusiCountry" formControlName="reBusiCountry" (ngModelChange)="checkData('submittedCountry')"  class="has-value">
+                                            <option [ngValue]="null" selected>Select</option>
+                                            <option *ngFor="let data of resp" [ngValue]='data.country'>{{data.country}}</option>   
+                                        </select>
+                                        <label>Select Country</label>
+                                        <div *ngIf="submittedCountry" class="invalid-feedback">
+                                       
+                                            Country is required
+                                       
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" >
+                                    <div class="inputDiv selectdiv">
+                                        <select id="busiDocuments" formControlName="reBusiDocument"  (ngModelChange)="checkData('submittedBusiDocument')">
+                                            <option [ngValue]="null" selected>Select</option>
+                                            <option  value="Registration Certificate or equivalent">Registration Certificate or equivalent</option>
+                                            <option value="Address Proof">Address Proof</option>
+                                            <option  value="Tax identification document">Tax identification document</option>
+                                            <option *ngIf="isBank" value="Statutory License" style="color: black;">Statutory License</option>
+                                        </select>
+                                        <label>Valid Documents</label>
+                                        <div *ngIf="submittedBusiDocument" class="invalid-feedback">
+                                                Select Valid Documents
+                                          </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Upload Document (only jpg, jpeg, png, pdf, tiff)  </label>
+                                    <!-- <span *ngIf="this.associateForm.get('busiUpload').value" class="labeltext" style="cursor: pointer;color: blue;margin-left: 50px;"
+                                     (click)="openDocument(this.associateForm.get('busiUpload').value)"> View</span> -->
+                            
+                                    <input  #myInput (change)="handleFileInputSA($event);selectFile($event);" type="file"  placeholder="No file"
+                                     class="filestyle"
+                                     name="reBusiUpload" id="reBusiUpload" data-icon="false"/>
+                                    <i class="material-icons deleteFile"  (click)="deleteFileContent()">delete</i>  
+                                    <span style="padding-left: 10px; color: #8c8a8a;font-size: 13px;font-weight: 300;"> File size should be less than 20MB</span>
+                                    <div *ngIf="submittedBusiUpload" class="invalid-feedback" style="top: 56px;">
+                                        Select Valid Documents
+                                  </div>
+                                </div> 
+                            </div> 
+                      
+                        <p id="paradiv">
+                            {{respMessage}}
+                        </p>
+                        <div class="clearfix"></div>
+                        <button type="" id="reBtninviteAssociate" (click)="reSubmitAssociate()" class="btn btn-info pull-right">re Submit</button>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </div> 
+
+
+
+<div id="associateSuccess" style="display: none;top: 0%;z-index: 9999;opacity: 1;" class="popupnew modal fade" role="dialog">
+    <div class="modal-dialog modal-md emaildiv" style="top: 114px;">
+       <!-- Modal content-->
+       <div class="modal-content">
+          <div class="modal-body">
+             <h2 style="margin-bottom: 0px !important;">Thank you for submitting the KYC documents.
+                <button type="button" class="close" (click)="closeAS()" style="right: 0px !important;">
+                    &times;
+                </button>
+             </h2>
+             <div class="padnew">
+                <div class="row">
+                   <div class="col-md-12">
+                      <div class="row">
+                         <div class="col-md-12" >
+                            <label></label>
+
+                            <div class="form-group">
+                               <span>Currently we are reviewing your account.
+                                    You will be notified on registered email address once we complete the review. </span>
+                              </div>
+                              <!-- <hr/> -->
+                         </div>
+                      </div>
+                      <button type="submit" class="btn btn-info pull-right" (click)="closeAS()" >OK</button>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>
+
+  
+
+  <div id="invalidFile" style="display: none;top: 0%;z-index: 9999;opacity: 1;padding-bottom: 40px;width: 100%;" class="popupnew modal fade" >
+    <div class="modal-dialog modal-md emaildiv" style="margin-top: 248px;">
+       <!-- Modal content-->
+       <div class="modal-content" style="padding-bottom: 25px;width: 100%;">
+          <div class="modal-body">
+             <h2>Invalid File</h2>
+             <div class="padnew">
+                <div class="row">
+                   <!--<p><strong>Enter Email ID here</strong></p> -->
+                   <div class="col-md-12">
+                      <div class="row">
+                         <div class="col-md-12">
+                            <p>{{invalidFileMsg}}</p>
+
+                         </div>
+                      </div>
+                      <button type="submit" class="btn btn-info pull-right" (click)="invalidDateOk()">OK</button>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>

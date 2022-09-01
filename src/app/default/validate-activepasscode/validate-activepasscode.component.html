@@ -1,0 +1,97 @@
+<!-- <div id="myModal6" class="modal2" style="display: none;"> -->
+    <!-- <div class="modal-dialog modal-md emaildiv"> -->
+    <!-- Modal content-->
+    <div *ngIf="!Active">
+        <div class="modal-content">   
+          <div class="modal-header" id="success_msg" style="text-align: right!important">
+              <!-- <button type="button" class="close" (click)="close()" id="close">&times;</button> -->
+          </div>
+          <div class="modal-body">
+            <h2></h2>
+            <div class="row">
+              <!--<p><strong>Enter Email ID here</strong></p> -->
+              <div class="col-md-12">
+                <div class="text-center">
+                  <!-- <p><strong>Thank you for sharing access details!</strong></p> -->
+                  <p class="ptext">We have sent a 5-digit passcode to your registered email address <span class="cust_email">{{emailAddress}}</span> Check your
+                    spam folder just in case our email has skipped your inbox.</p> 
+                  <div class="form-group"></div>
+                  <div class="clearfix"></div>
+                <div class="col-md-12 inputDiv captcha_div_mobile">   
+                  <re-captcha  (resolved)="resolved($event)" (click)="captchaValue()" [(ngModel)]="recaptchaReactive" siteKey="6Lda-jIaAAAAAMNrtvrHcHMCMAb7OvJK9ZfSXJ5s">
+                  </re-captcha>
+                 
+                  <div class="invalid-feedback captchaErrMsg" >{{captchaErrMsg}}</div>
+                </div> 
+               
+                <div class="clearfix"></div>
+               <br> <br>
+                  <div class="col-md-4 col-md-offset-4" style="bottom: 16px;">
+                    <div class="inputDiv">
+                      <input type="text" style=" text-align: center;" [(ngModel)]="passValue" (click)="passCodeValue()" (keypress)="validateRegexFields($event, 'number')" maxlength="6">
+                      <label style="margin-left: 25%; font-weight: bold;left: 28px;">Enter Passcode</label>
+                      <div class="invalid-feedback">{{errMessage}}</div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                                       <div class="checkbox" style="margin-top:10px!important;" *ngIf="!tremandcond">
+                                          <label><!--Rahul Changes-->
+                                             <input type="checkbox" id="isCheckedForTerms" [(ngModel)]="termsAndcondition" (change)="acceptTerms()">I agree to
+                                          </label>
+                                     <a (click)="openTermAndServiceDialog('1')" class='terms_condition'> Terms & Conditions
+                                    </a> <span class='andspan'> and</span>
+                                     <a (click)="openTermAndServiceDialog('2')" class='andPrivacy' style="cursor: pointer;"> Privacy Policy</a>
+                                          <div id="checkboxError" style="color:#ff0330;font-size: 11px;font-weight: 400;display: none;">
+                                             Kindly accept terms of service and privacy policy
+                                          </div>
+                                       </div>
+                </div>
+                <button class="btn btn-info pull-right" (click)="onOTPClick()">Submit</button>
+               
+                <div>
+  
+              </div>
+              </div>
+         
+            </div>
+          </div>
+        
+        </div>
+      </div>
+
+      <div id="attemptFail" style="display: none;top: 20%;z-index: 9999;opacity: 1;" class="popupnew modal fade" >
+        <div class="modal-dialog modal-md emaildiv">
+           <!-- Modal content-->
+           <div class="modal-content" style="width: 76%;">
+              <div class="modal-body">
+                 <h2 style="padding-left: 51px;" *ngIf="useridblock">Account is Temporarily Blocked  <button type="button" class="close" (click)="close()" style="  margin-left: -276px;
+                  margin-bottom: 0px;
+                  margin-top: -2px;
+                  color: #565151;">&times;</button></h2>
+                   <h2 style="padding-left: 51px;" *ngIf="passCodenotmatch">Invalid Details<button type="button" class="close" (click)="close()" style="  margin-left: -175px;
+                     margin-bottom: 0px;
+                     margin-top: -2px;
+                     color: #565151;">&times;</button></h2>
+                 <div class="padnew">
+                    <div class="row">
+                       <!--<p><strong>Enter Email ID here</strong></p> -->
+                       <div class="col-md-12">
+                          <div class="row">
+                             <div class="col-md-12">
+                                <h5>{{attempts}}</h5>
+                               
+                             </div>
+                          </div>
+                          <button type="submit" class="handleRefEdit btn btn-info pull-right" (click)="close()">OK</button>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+      <!-- </div> -->
+      <app-term-and-conditions></app-term-and-conditions>
+    <!-- <router-outlet></router-outlet> -->
+    
+    
